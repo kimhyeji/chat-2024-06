@@ -16,17 +16,7 @@ public class chatRoomController {
     }
 
     @GetMapping("/make")
-    @ResponseBody
     public String showMake() {
-        return """
-                <form action="">
-                    <div>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <input type="submit">
-                    </div>
-                </form>
-                """.stripIndent();
+        return "domain/chat/chatRoom/make";
     }
 }
