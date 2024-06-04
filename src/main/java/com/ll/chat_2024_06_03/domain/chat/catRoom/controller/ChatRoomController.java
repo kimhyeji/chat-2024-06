@@ -16,12 +16,11 @@ public class ChatRoomController {
     private final ChatRoomService chatRoomService;
 
     @GetMapping("/{roomId}")
-    @ResponseBody
     public String showRoom(
             @PathVariable("roomId") final long roomId,
             @RequestParam(value = "writerName", defaultValue = "NoName") final String writerName
     ) {
-        return "%d번 채팅방 입니다. writer : %s".formatted(roomId, writerName);
+        return "domain/chat/chatRoom/room";
     }
 
     @GetMapping("/make")
