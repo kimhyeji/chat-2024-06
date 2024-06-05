@@ -5,7 +5,9 @@
     <a href="list">채팅방 목록</a>
 </div>
 
-<form th:action="@{|/chat/room/${roomId}/write|}" method="POST">
+<a onclick="return false;" href="https://www.naver.com">네이버로 이동</a>
+
+<form onsubmit="submitWriteForm(this); return false;" th:action="@{|/chat/room/${roomId}/write|}" method="POST">
     <input type="text" name="writerName" placeholder="작성자 명">
     <input type="text" name="content" placeholder="내용">
     <input type="submit" value="작성">
@@ -21,3 +23,25 @@
         </li>
     </ul>
 </div>
+
+<script>
+    function submitWriteForm(form) {
+        form.writerName.value = form.writerName.value.trim();
+
+        if ( form.writerName.value.length == 0 ) {
+            alert("작성자 명을 입력해주세요.");
+            form.writerName.focus();
+            return;
+        }
+
+        form.content.value = form.content.value.trim();
+
+        if ( form.content.value.length == 0 ) {
+            alert("내용을 입력해주세요.");
+            form.content.focus();
+            return;
+        }
+
+        form.submit();
+    }
+</script>
