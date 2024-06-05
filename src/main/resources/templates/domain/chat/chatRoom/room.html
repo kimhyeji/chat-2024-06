@@ -61,6 +61,15 @@
                     content: form.content.value,
                 }),
             }
-        );
+        ).then(
+            response => response.json()
+        ).then(
+            json => {
+                if ( json.msg ) alert(json.msg);
+            }
+        ).catch(error => alert(error));
+
+        form.content.value = '';
+        form.content.focus();
     }
 </script>
