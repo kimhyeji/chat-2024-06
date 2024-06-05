@@ -66,7 +66,7 @@ public class ChatRoomController {
     @Getter
     @AllArgsConstructor
     public static class WriteResponseBody {
-        private ChatMessage chatMessage;
+        private ChatMessage message;
     }
 
     @PostMapping("/{roomId}/write")
