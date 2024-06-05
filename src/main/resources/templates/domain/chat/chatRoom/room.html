@@ -7,7 +7,7 @@
 
 <a onclick="return false;" href="https://www.naver.com">네이버로 이동</a>
 
-<form onsubmit="submitWriteForm(this); return false;" th:action="@{|/chat/room/${roomId}/write|}" method="POST">
+<form onsubmit="submitWriteForm(this); return false;" method="POST">
     <input type="text" name="writerName" placeholder="작성자 명">
     <input type="text" name="content" placeholder="내용">
     <input type="submit" value="작성">
@@ -23,6 +23,10 @@
         </li>
     </ul>
 </div>
+
+<script th:inline="javascript">
+    const roomId = /*[[${roomId}]]*/ 0;
+</script>
 
 <script>
     function submitWriteForm(form) {
@@ -42,6 +46,21 @@
             return;
         }
 
-        form.submit();
+        const action = `/chat/room/${roomId}/write`;
+
+        fetch(
+            action,
+            {
+                method: 'POST',
+                headers:  {
+                    'accept' : 'application/json',
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    writerName: form.writerName.value,
+                    content: form.content.value,
+                }),
+            }
+        );
     }
 </script>
