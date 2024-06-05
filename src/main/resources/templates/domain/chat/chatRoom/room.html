@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
 <h1 th:text="|${roomId}번 채팅방|"></h1>
 
 <div>
@@ -75,32 +78,10 @@
         form.content.focus();
     }
 
-    function loadMoreChatMessages() {
-        const action = `/chat/room/${roomId}/messagesAfter/${lastChatMessageId}`;
-
-        fetch(
-            action,
-            {
-                method: 'GET',
-                headers:  {
-                    'accept' : 'application/json'
-                }
-            }
-        )
-        .then(response => response.json())
-        .then(json => drawMoreChatMessages(json.data.messages))
-        .then(() => setTimeout(loadMoreChatMessages, 500))
-        .catch(error => alert(error));
-    }
-
-    function drawMoreChatMessages(messages) {
-        messages.forEach((message) => {
-            drawMoreChatMessage(message);
-        });
-    }
 
     function drawMoreChatMessage(message) {
         lastChatMessageId = message.id;
+        console.log(lastChatMessageId);
 
         chatMessagesEl
             .insertAdjacentHTML(
@@ -109,5 +90,15 @@
             );
     }
 
-    loadMoreChatMessages();
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        stompClient.subscribe(`/topic/chat/room/${roomId}/messageCreated`, function (data) {
+            const jsonData = JSON.parse(data.body);
+            drawMoreChatMessage(jsonData.data.message);
+        });
+    });
 </script>
