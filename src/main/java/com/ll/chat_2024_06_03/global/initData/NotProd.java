@@ -1,7 +1,7 @@
 package com.ll.chat_2024_06_03.global.initData;
 
-import com.ll.chat_2024_06_03.domain.chat.catRoom.entity.ChatRoom;
-import com.ll.chat_2024_06_03.domain.chat.catRoom.service.ChatRoomService;
+import com.ll.chat_2024_06_03.domain.chat.chatRoom.entity.ChatRoom;
+import com.ll.chat_2024_06_03.domain.chat.chatRoom.service.ChatRoomService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
