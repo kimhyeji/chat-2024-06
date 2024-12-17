@@ -21,7 +21,7 @@ public class NotProd {
             ChatRoom chatRoom3 = chatRoomService.make("음악");
 
             IntStream.rangeClosed(1, 30)
-                    .forEach(no -> chatRoomService.write(chatRoom1.getId(), "홍길동", "내용 " + no));
+                    .forEach(no -> chatRoomService.write(chatRoom1.getId(), "홍길동", "내용 " + no, null));
         };
     }
 }

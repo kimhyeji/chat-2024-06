@@ -2,6 +2,7 @@ package com.ll.chat_2024_06_03.domain.chat.chatMessage.entity;
 
 import com.ll.chat_2024_06_03.domain.chat.chatRoom.entity.ChatRoom;
 import com.ll.chat_2024_06_03.global.jpa.baseEntity.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
@@ -26,4 +27,8 @@ public class ChatMessage extends BaseEntity {
 
     @Getter
     private String content;
+
+    @Getter
+    @Column(columnDefinition = "TEXT")
+    private String imageUrl;
 }

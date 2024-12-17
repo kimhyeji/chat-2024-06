@@ -35,10 +35,10 @@ public class ChatRoomService {
     }
 
     @Transactional
-    public ChatMessage write(long roomId, String writerName, String content) {
+    public ChatMessage write(long roomId, String writerName, String content, String image) {
         ChatRoom chatRoom = chatRoomRepository.findById(roomId).get();
 
-        ChatMessage chatMessage = chatRoom.writeMessage(writerName, content);
+        ChatMessage chatMessage = chatRoom.writeMessage(writerName, content, image);
 
         return chatMessage;
     }

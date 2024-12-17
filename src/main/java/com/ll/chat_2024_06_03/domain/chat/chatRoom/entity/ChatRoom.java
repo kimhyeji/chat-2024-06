@@ -38,12 +38,13 @@ public class ChatRoom extends BaseEntity {
         this.name = name;
     }
 
-    public ChatMessage writeMessage(String writerName, String content) {
+    public ChatMessage writeMessage(String writerName, String content, String imageUrl) {
         ChatMessage chatMessage = ChatMessage
                 .builder()
                 .chatRoom(this)
                 .writerName(writerName)
                 .content(content)
+                .imageUrl(imageUrl)
                 .build();
 
         chatMessages.add(chatMessage);

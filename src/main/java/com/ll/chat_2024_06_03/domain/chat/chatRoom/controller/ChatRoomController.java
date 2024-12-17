@@ -61,6 +61,8 @@ public class ChatRoomController {
     public static class WriteRequestBody {
         private String writerName;
         private String content;
+        private String imageUrl;
+
     }
 
     @Getter
@@ -75,7 +77,7 @@ public class ChatRoomController {
             @PathVariable("roomId") final long roomId,
             @RequestBody final WriteRequestBody requestBody
     ) {
-        ChatMessage chatMessage = chatRoomService.write(roomId, requestBody.getWriterName(), requestBody.getContent());
+        ChatMessage chatMessage = chatRoomService.write(roomId, requestBody.getWriterName(), requestBody.getContent(), requestBody.getImageUrl());
 
         RsData<WriteResponseBody> writeRs = RsData.of("S-1", "%d번 메시지를 작성하였습니다.".formatted(chatMessage.getId()), new WriteResponseBody(chatMessage));
 
