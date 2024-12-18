@@ -30,9 +30,9 @@
             <th:block th:text="${chatMessage.id}"></th:block>
             )
             <th:block th:text="${chatMessage.content}"></th:block>
-            <th:block th:if="${chatMessage.image != null}">
+            <th:block th:if="${chatMessage.imageUrl != null}">
                 <br>
-                <img th:src="${chatMessage.image}" style="max-width: 300px;">
+                <img th:src="${chatMessage.imageUrl}" style="max-width: 300px;">
             </th:block>
         </li>
     </ul>
@@ -83,15 +83,15 @@
             body: JSON.stringify({
                 writerName: writerName,
                 content: content,
-                image: imageBase64
+                imageUrl: imageBase64
             }),
         }).catch(error => alert("전송 오류: " + error));
     }
 
     function drawMoreChatMessage(message) {
         let messageHtml = `<li>${message.writerName} : ( ${message.id} ) ${message.content || ""}`;
-        if (message.image) {
-            messageHtml += `<br><img src="${message.image}" style="max-width: 300px;">`;
+        if (message.imageUrl) {
+            messageHtml += `<br><img src="${message.imageUrl}" style="max-width: 300px;">`;
         }
         messageHtml += `</li>`;
         chatMessagesEl.insertAdjacentHTML("afterBegin", messageHtml);
